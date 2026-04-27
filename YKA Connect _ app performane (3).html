@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)file:///C:/Users/18152/Downloads/app%20performance(2).html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YKA Connect | Global Executive Suite</title>
+    <script src="./YKA Connect _ Global Executive Suite_files/chart.js.download"></script>
+    <style>
+        :root {
+            --yka-red: #E22120;
+            --sidebar-dark: #1A1C1E;
+            --bg-porcelain: #F4F7F9;
+            --text-charcoal: #2D3134;
+            --text-slate: #64748B;
+            --white: #FFFFFF;
+            --glass-border: rgba(226, 33, 32, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-porcelain);
+            color: var(--text-charcoal);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- SIDEBAR --- */
+        aside {
+            width: 300px;
+            background-color: var(--sidebar-dark);
+            color: white;
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+            z-index: 100;
+            overflow-y: auto;
+        }
+
+        aside h2 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-slate);
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .filter-section { margin-bottom: 35px; }
+        .filter-title { font-size: 13px; font-weight: 700; color: #94A3B8; margin-bottom: 15px; display: block; }
+        
+        .check-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #CBD5E1;
+            transition: color 0.2s;
+        }
+
+        .check-item:hover { color: var(--yka-red); }
+        .check-item input { margin-right: 12px; accent-color: var(--yka-red); width: 16px; height: 16px; cursor: pointer; }
+
+        .btn-sync {
+            background: var(--yka-red);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: auto;
+            letter-spacing: 1px;
+        }
+
+        /* --- MAIN CONTENT --- */
+        main {
+            flex: 1;
+            padding: 40px 60px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .header-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 50px;
+        }
+
+        .header-box h1 { font-size: 32px; font-weight: 800; margin: 0; letter-spacing: -1px; }
+        .header-box h1 span { color: var(--yka-red); font-weight: 300; }
+
+        /* --- CHART CARDS --- */
+        .chart-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+        }
+
+        .chart-card h3 {
+            margin: 0 0 30px 0;
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .chart-card h3::before {
+            content: '';
+            width: 5px;
+            height: 22px;
+            background: var(--yka-red);
+            margin-right: 15px;
+            border-radius: 10px;
+        }
+
+        .chart-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .full-row { grid-column: span 2; }
+
+        .viz-container { height: 400px; position: relative; }
+        
+        /* Stats Overlay */
+        .card-insight {
+            background: var(--bg-porcelain);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--yka-red);
+            font-size: 14px;
+            color: var(--text-charcoal);
+            line-height: 1.6;
+        }
+
+    </style>
+</head>
+<body>
+
+<aside>
+    <div style="margin-bottom: 50px; font-weight: 900; font-size: 24px;">YKA Connect<span>.App</span></div>
+    
+    <h2>Command Center</h2>
+
+    <div class="filter-section">
+        <span class="filter-title">Regional Distribution</span>
+        <label class="check-item"><input type="checkbox" class="branch-opt" value="Nissan Sitra" checked=""> Nissan Sitra</label>
+        <label class="check-item"><input type="checkbox" class="branch-opt" value="Ford Sitra" checked=""> Ford Sitra</label>
+        <label class="check-item"><input type="checkbox" class="branch-opt" value="Nissan Salmabad" checked=""> Nissan Salmabad</label>
+        <label class="check-item"><input type="checkbox" class="branch-opt" value="Nissan Manama" checked=""> Nissan Manama</label>
+        <label class="check-item"><input type="checkbox" class="branch-opt" value="Janabiya" checked=""> Janabiya</label>
+        <label class="check-item"><input type="checkbox" class="branch-opt" value="Salmabad QL" checked=""> QL Salmabad</label>
+        <label class="check-item"><input type="checkbox" class="branch-opt" value="Arad QL" checked=""> QL Arad</label>
+    </div>
+
+    <div class="filter-section">
+        <span class="filter-title">Data Layers</span>
+        <label class="check-item"><input type="checkbox" id="toggleApp" checked=""> App Engagement</label>
+        <label class="check-item"><input type="checkbox" id="toggleFootfall" checked=""> Branch Footfall</label>
+    </div>
+
+    <button class="btn-sync" onclick="syncAllCharts()">Update Global Suite</button>
+</aside>
+
+<main style="opacity: 1;">
+    <div class="header-box">
+        <div>
+            <h1>YKA <span>Connect</span></h1>
+            <p style="color: var(--text-slate); margin-top: 8px;">C26 March — 25 April 2026</p>
+        </div>
+        <div style="text-align: right;">
+            <div style="font-weight: 700; font-size: 14px;">new App Users</div>
+            <div style="font-size: 28px; font-weight: 900; color: var(--yka-red);" id="stat-total-footfall">3,741</div>
+        </div>
+    <div style="text-align: right;">
+            <div style="font-weight: 700; font-size: 14px;">Total Footfall Pool</div>
+            <div style="font-size: 28px; font-weight: 900; color: var(--yka-red);" id="stat-total-footfall">3,741</div>
+        </div></div>
+
+    <div class="chart-card">
+        <h3>1. App Booking Adoption Rate</h3>
+        <div class="chart-layout">
+            <div class="viz-container">
+                <canvas id="chartAdoption" width="513" height="513" style="display: block; box-sizing: border-box; height: 342px; width: 342px;"></canvas>
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+                <div class="card-insight">
+                    <strong>Executive Note:</strong> This visual identifies the ratio of digital-to-manual service entry. Currently, the vast majority of our customers are still using traditional booking channels.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-card">
+        <h3>2. User Verification Status</h3>
+        <div class="chart-layout">
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+                <div class="card-insight">
+                    <strong>Data Integrity:</strong> High verification rates (currently ~83%) ensure that our CRM data is accurate..
+                </div>
+            </div>
+            <div class="viz-container">
+                <canvas id="chartVerify" width="513" height="513" style="display: block; box-sizing: border-box; height: 342px; width: 342px;"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-card">
+        <h3>3. Footfall vs. App Adoption</h3>
+        <div class="viz-container full-row" style="height: 450px;">
+            <canvas id="chartEfficiency" width="1005" height="675" style="display: block; box-sizing: border-box; height: 450px; width: 670px;"></canvas>
+        </div>
+    </div>
+
+    <div class="chart-card">
+        <h3>4. Other in App Services Requests</h3>
+        <div class="chart-layout">
+            <div class="viz-container">
+                <canvas id="chartRequests" width="513" height="600" style="display: block; box-sizing: border-box; height: 400px; width: 342px;"></canvas>
+            </div>
+            <div class="card-insight" style="height: fit-content; align-self: center;">
+                <strong>Strategic Insight:</strong> Appraisal and Leasing requests are the strongest (Other in Services). This indicates our existing service customers are actively looking to upgrade their fleet or personal vehicles through the app interface.
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-card">
+        <h3>5. (New Sales) App Users </h3>
+        <div class="viz-container full-row">
+            <canvas id="chartSales" width="1005" height="600" style="display: block; box-sizing: border-box; height: 400px; width: 670px;"></canvas>
+        </div>
+    </div>
+
+</main>
+
+<script>
+    // --- GLOBAL DATA REPOSITORY ---
+    const DB = {
+        branches: {
+            "Nissan Sitra": { footfall: 1072, app: 8, ver: 60, gst: 10, appraisal: 1, lease: 2, sales: { "Nissan New": 26, "Nissan Fleet": 12 } },
+            "Ford Sitra": { footfall: 835, app: 14, ver: 80, gst: 15, appraisal: 2, lease: 1, sales: { "Ford New": 34, "Ford Fleet": 5 } },
+            "Nissan Salmabad": { footfall: 470, app: 5, ver: 40, gst: 8, appraisal: 1, lease: 0, sales: {} },
+            "Nissan Manama": { footfall: 426, app: 3, ver: 35, gst: 5, appraisal: 0, lease: 1, sales: {} },
+            "Janabiya": { footfall: 339, app: 9, ver: 50, gst: 12, appraisal: 1, lease: 1, sales: {} },
+            "Salmabad QL": { footfall: 360, app: 6, ver: 30, gst: 10, appraisal: 1, lease: 1, sales: {} },
+            "Arad QL": { footfall: 239, app: 3, ver: 20, gst: 4, appraisal: 0, lease: 0, sales: { "Infiniti": 3 } }
+        }
+    };
+
+    let charts = {};
+
+    function init() {
+        const ctxAdoption = document.getElementById('chartAdoption').getContext('2d');
+        charts.adoption = new Chart(ctxAdoption, { type: 'doughnut', data: { labels: ['App', 'Manual'], datasets: [{ backgroundColor: ['#E22120', '#E2E8F0'], borderWidth: 0 }] }, options: { cutout: '80%', plugins: { legend: { position: 'bottom' } } } });
+
+        const ctxVerify = document.getElementById('chartVerify').getContext('2d');
+        charts.verify = new Chart(ctxVerify, { type: 'pie', data: { labels: ['Verified', 'Guest'], datasets: [{ backgroundColor: ['#E22120', '#1A1C1E'], borderWidth: 0 }] }, options: { plugins: { legend: { position: 'bottom' } } } });
+
+        const ctxEff = document.getElementById('chartEfficiency').getContext('2d');
+        charts.efficiency = new Chart(ctxEff, { type: 'bar', data: { labels: [], datasets: [ { label: 'Footfall', backgroundColor: '#E2E8F0', borderRadius: 4 }, { label: 'App Bookings', backgroundColor: '#E22120', borderRadius: 4 } ] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { display: false } } } } });
+
+        const ctxReq = document.getElementById('chartRequests').getContext('2d');
+        charts.requests = new Chart(ctxReq, { type: 'polarArea', data: { labels: ['Appraisal', 'Test Drive', 'Leasing', 'Reserve'], datasets: [{ backgroundColor: ['rgba(226, 33, 32, 0.8)', 'rgba(26, 28, 30, 0.8)', 'rgba(100, 116, 139, 0.8)', 'rgba(203, 213, 225, 0.8)'] }] }, options: { maintainAspectRatio: false } });
+
+        const ctxSales = document.getElementById('chartSales').getContext('2d');
+        charts.sales = new Chart(ctxSales, { type: 'bar', data: { labels: ['Ford New', 'Nissan New', 'Nissan Fleet', 'Ford Fleet', 'Infiniti'], datasets: [{ label: 'App Pairings', backgroundColor: '#E22120', borderRadius: 5 }] }, options: { indexAxis: 'y', maintainAspectRatio: false } });
+
+        syncAllCharts();
+    }
+
+    function syncAllCharts() {
+        const selected = Array.from(document.querySelectorAll('.branch-opt:checked')).map(el => el.value);
+        
+        let tFootfall = 0, tApp = 0, tVer = 0, tGst = 0, tAppr = 0, tLease = 0;
+        let salesMap = { "Ford New": 0, "Nissan New": 0, "Nissan Fleet": 0, "Ford Fleet": 0, "Infiniti": 0 };
+
+        selected.forEach(bName => {
+            const b = DB.branches[bName];
+            tFootfall += b.footfall;
+            tApp += b.app;
+            tVer += b.ver;
+            tGst += b.gst;
+            tAppr += b.appraisal;
+            tLease += b.lease;
+            for (let sKey in b.sales) salesMap[sKey] += b.sales[sKey];
+        });
+
+        // Update Global Stat
+        document.getElementById('stat-total-footfall').innerText = tFootfall.toLocaleString();
+
+        // Update Adoption
+        charts.adoption.data.datasets[0].data = [tApp, tFootfall - tApp];
+        charts.adoption.update();
+
+        // Update Verify
+        charts.verify.data.datasets[0].data = [tVer, tGst];
+        charts.verify.update();
+
+        // Update Efficiency
+        charts.efficiency.data.labels = selected;
+        charts.efficiency.data.datasets[0].data = selected.map(n => DB.branches[n].footfall);
+        charts.efficiency.data.datasets[1].data = selected.map(n => DB.branches[n].app);
+        charts.efficiency.update();
+
+        // Update Requests
+        charts.requests.data.datasets[0].data = [tAppr, 1, tLease, 1]; // Test Drive/Reserve hardcoded for demo scale
+        charts.requests.update();
+
+        // Update Sales
+        charts.sales.data.datasets[0].data = Object.values(salesMap);
+        charts.sales.update();
+
+        // Visual Feedback
+        const main = document.querySelector('main');
+        main.style.opacity = '0.4';
+        setTimeout(() => main.style.opacity = '1', 200);
+    }
+
+    window.onload = init;
+</script>
+
+
+</body></html>
